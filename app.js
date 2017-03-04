@@ -3,7 +3,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 //var db = 'mongodb://localhost:27017/seekpick';
 //mongoose.connect(db);
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect("mongodb://seek:seek123@ds031832.mlab.com:31832/seekpick");
 require('./src/utilities/passport')(passport);
 var express = require('express');
 var app = express();

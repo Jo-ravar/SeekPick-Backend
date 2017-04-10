@@ -24,8 +24,15 @@ var UserSchema = new Schema({
   location:{
       type:String,
       required:true
-  }
-  
+  },
+latitude:{
+   type:Number,
+   required:true
+},
+longitude:{
+  type:Number,
+  required:true
+}
 });
 
 module.exports = mongoose.model('User', UserSchema);

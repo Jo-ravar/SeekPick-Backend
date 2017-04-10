@@ -1,9 +1,10 @@
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var mongoose = require('mongoose');
+var config = require('./src/utilities/config');
 //var db = 'mongodb://localhost:27017/seekpick';
 //mongoose.connect(db);
-mongoose.connect("mongodb://seek:seek123@ds031832.mlab.com:31832/seekpick");
+mongoose.connect(config.db);
 require('./src/utilities/passport')(passport);
 var express = require('express');
 var app = express();
@@ -15,7 +16,9 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(passport.initialize());
 
 var indexRoute=require('./src/routes/index');
+var itemRoute=require('./src/routes/item'); 
 app.use('/',indexRoute);
+app.use('/item',itemRoute);
 
 app.listen(app.get('port'),function(err) {
     if(!err)

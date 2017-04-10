@@ -8,7 +8,7 @@ var Passport = require('passport');
 
 router.route('/register')
 .post(function(req, res) {  
-  if(!req.body.email || !req.body.password || !req.body.username ||!req.body.location) {
+  if(!req.body.email || !req.body.password || !req.body.username ||!req.body.location ||!req.body.lat ||!req.body.long) {
     res.json({ success: false, message: 'Please fill all details.' });
   } else {
 
@@ -32,6 +32,8 @@ router.route('/register')
       password: req.body.password,
       username:req.body.username,
       location:req.body.location,
+      latitude:req.body.lat,
+      longitude:req.body.long,
       name:nameStr,
       pincode:pincodestr,
       phone:phoneStr
@@ -99,7 +101,10 @@ router.route('/edit')
       phone:phoneStr,
       pincode:pincodestr,
       location:locstr,
-      username:userStr
+      username:userStr,
+      latitude:req.body.lat,
+      longitude:req.body.long
+      
     }
     var id =req.user._id;
     var query={_id:id};

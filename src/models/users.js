@@ -25,14 +25,16 @@ var UserSchema = new Schema({
       type:String,
       required:true
   },
-latitude:{
-   type:Number,
-   required:true
-},
-longitude:{
-  type:Number,
-  required:true
-}
+   loc: {
+    type: {
+      type: "String",
+      required: true,
+      enum: ['Point', 'LineString', 'Polygon'],
+      default: 'Point'
+    },
+    coordinates: [Number]
+  }
 });
+UserSchema.index({ loc: '2dsphere' });
 
 module.exports = mongoose.model('User', UserSchema);

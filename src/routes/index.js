@@ -32,8 +32,10 @@ router.route('/register')
       password: req.body.password,
       username:req.body.username,
       location:req.body.location,
-      latitude:req.body.lat,
-      longitude:req.body.long,
+      loc:{
+         type:"Point",
+         coordinates:[req.body.lat,req.body.long]
+      },
       name:nameStr,
       pincode:pincodestr,
       phone:phoneStr
@@ -102,9 +104,10 @@ router.route('/edit')
       pincode:pincodestr,
       location:locstr,
       username:userStr,
-      latitude:req.body.lat,
-      longitude:req.body.long
-      
+      loc:{
+         type:"Point",
+         coordinates:[req.body.lat,req.body.long]
+      }
     }
     var id =req.user._id;
     var query={_id:id};

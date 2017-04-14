@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.0",
+    "deasync": "^0.1.9",
     "express": "^4.15.0",
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.8.5",

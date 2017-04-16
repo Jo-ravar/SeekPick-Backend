@@ -9,10 +9,10 @@ router.route('/')
   var searchData=req.query.id;
   var db =dbhelper.db;
   var collection = db.collection('items');
-  db.ensureIndex("items", {  
-  tags: "text",
-  name:"text"
-});
+  collection.ensureIndex({
+  name:"text",      
+  tags: "text"
+},{weights: {name: 20}});
 var Rangess=0;
 if(!req.body.range)
 Rangess=100;
@@ -39,6 +39,7 @@ else
                       $text: {$search: searchData},
                   } 
              },
+              { $sort: { score: { $meta: "textScore" } } },
                
               {
                   $lookup:

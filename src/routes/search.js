@@ -23,7 +23,6 @@ Rangess=parseFloat(req.body.range);
 var lat =parseFloat(req.body.lat);
 var long=parseFloat(req.body.long); 
 
-
  User.find({ loc: { $near: {'$maxDistance':Rangess*1000, '$geometry': { type: 'Point', coordinates: [ lat, long ] }} }},function(err,data, stats){
 if(err)
 console.log("ERROR:---- "+ JSON.stringify(err)+" ");
@@ -63,6 +62,7 @@ else
                      "shopkeeper_docs.pincode":1,
                      "shopkeeper_docs.phone":1,
                      "shopkeeper_docs.loc":1,
+                     score:1
                   } 
               }                
 ],function(err,data){

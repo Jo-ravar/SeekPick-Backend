@@ -25,6 +25,11 @@ var UserSchema = new Schema({
       type:String,
       required:true
   },
+  registerId:{
+      type: String,
+      required:true,
+      unique:true
+  },
    loc: {
     type: {
       type: "String",
@@ -35,6 +40,7 @@ var UserSchema = new Schema({
     coordinates: [Number]
   }
 });
+
 UserSchema.index({ loc: '2dsphere' });
 
 module.exports = mongoose.model('User', UserSchema);

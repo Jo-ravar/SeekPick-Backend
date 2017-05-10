@@ -18,10 +18,12 @@ app.use(passport.initialize());
 var indexRoute=require('./src/routes/index');
 var itemRoute=require('./src/routes/item'); 
 var searchRoute=require('./src/routes/search');
+var pingRoute=require('./src/routes/ping');
 
 app.use('/',indexRoute);
 app.use('/item',itemRoute);
 app.use('/search',searchRoute);
+app.use('/ping',pingRoute);
 
 app.listen(app.get('port'),function(err) {
     if(!err)

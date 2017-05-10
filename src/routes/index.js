@@ -8,7 +8,7 @@ var Passport = require('passport');
 
 router.route('/register')
 .post(function(req, res) {  
-  if(!req.body.email || !req.body.password || !req.body.username ||!req.body.location ||!req.body.lat ||!req.body.long) {
+  if(!req.body.email || !req.body.password || !req.body.username ||!req.body.location ||!req.body.lat ||!req.body.long|| !req.body.deviceId) {
     res.json({ success: false, message: 'Please fill all details.' });
   } else {
 
@@ -38,8 +38,8 @@ router.route('/register')
       },
       name:nameStr,
       pincode:pincodestr,
-      phone:phoneStr
-      
+      phone:phoneStr,
+      registerId:req.body.deviceId      
     });
 
     // Attempt to save the user

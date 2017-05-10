@@ -40,7 +40,7 @@ router.route('/')
                }
               else {
                 console.log('Done!');
-                res.send("Donnnnneee");
+                 res.json({ success: true, message: 'Shopkeeper is notified about your query.' });
             }
         });
       }

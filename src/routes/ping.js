@@ -15,14 +15,14 @@ router.route('/')
                 }
                 else {
                       console.log(" USer data send"+result);
-                      device=result.registerId;
+                      device=result[0].registerId;
                       console.log("Device is:-- "+device);
                       request({
                  url: 'https://fcm.googleapis.com/fcm/send',
                  method: 'POST',
                  headers: {
                      'Content-Type' :' application/json',
-                    'Authorization': 'key=AIzaSyCKJ3xNEk3xTvHhfVuY-ahgBTDEYQrqrg0'
+                    'Authorization': 'key=AIzaSyDQelCUdcvHt_JidbEgcRmiws6taxS0RVY'
                          },
                  body: JSON.stringify(
                       {   data : {

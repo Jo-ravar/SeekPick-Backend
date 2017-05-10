@@ -16,6 +16,7 @@
     "mongoose": "^4.8.5",
     "mongoose-type-email": "^1.0.3",
     "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1"
+    "passport-jwt": "^2.2.1",
+    "request": "^2.81.0"
   }
 }

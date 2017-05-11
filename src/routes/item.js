@@ -5,17 +5,26 @@ var ObjectID=require('mongodb').ObjectID;
 
 router.route('/add')
 .post(passport.authenticate('jwt', { session: false }),function(req,res){
-    if(!req.body.itemname||!req.body.itemprice||!req.body.tags){
+    if(!req.body.itemname||!req.body.itemprice||!req.body.tags||!req.body.status){
         res.json({ success: false, message: 'Please fill all details.' });
     }else{
-       
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var dateStr = dd+'/'+mm+'/'+yyyy;
+        console.log("date is :-- "+dateStr);
+
         var user = req.user._id; 
         var db=dbhelper.db;
         var collection = db.collection('items');
+
        collection.insertOne({
             name:req.body.itemname,
             price:req.body.itemprice,
             tags:req.body.tags,
+            status:req.body.status,
+            lastUpdate:dateStr,
             shopkeeper:user
         }, function (err, result) {
             if (err) {
@@ -33,16 +42,25 @@ router.route('/add')
 
 router.route('/edit')
 .post(passport.authenticate('jwt', { session: false }),function(req,res){
-     if(!req.body.itemname||!req.body.itemprice||!req.body.tags||!req.query.id){
+     if(!req.body.itemname||!req.body.itemprice||!req.body.tags||!req.query.id||!req.body.status){
          res.json({ success: false, message: 'Please edit all details.' });
      }
      else{
-            var user = req.user._id; 
+       var user = req.user._id; 
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var dateStr = dd+'/'+mm+'/'+yyyy;
+        console.log("date is :-- "+dateStr);
 
             var newData = {
             name:req.body.itemname,
             price:req.body.itemprice,
             tags:req.body.tags,
+            status:req.body.status,
+            lastUpdate:dateStr,
             shopkeeper:user
         }
         var id=req.query.id;
@@ -115,7 +133,33 @@ router.route('/myproducts')
          });
 });
 
-
-
+router.route('/status')
+.post(passport.authenticate('jwt', { session: false }),function(req,res){
+if(!req.body.itemname ||!req.body.ans)
+    {
+        res.json({ success: false, message: 'Please specify object name and its status' });
+    }
+ else{
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var dateStr = dd+'/'+mm+'/'+yyyy;
+       console.log("name and ans :-- "+req.body.itemname+" "+req.body.ans);
+        var user = req.user._id; 
+        var db=dbhelper.db;
+        var collection = db.collection('items');
+        collection.update({shopkeeper:user,name:req.body.itemname},{$set:{status:req.body.ans, lastUpdate:dateStr}},function(err,data){
+             if(err)
+            {
+                console.log("Error in editing " + JSON.stringify(err));
+                 return res.json({ success: false, message: 'Something went wrong.'});
+            }
+       else{
+            res.send({ success: true, message: ' successfully updated status.' });
+         }
+        });
+   }
+});
 
 module.exports = router;

@@ -104,6 +104,7 @@ router.route('/edit')
       pincode:pincodestr,
       location:locstr,
       username:userStr,
+      registerId:req.body.deviceId,
       loc:{
          type:"Point",
          coordinates:[req.body.lat,req.body.long]

@@ -55,6 +55,8 @@ else
                       "name":1,
                       "price":1,
                       "tags":1,
+                      "status":1,
+                      "lastUpdate":1,
                       "shopkeeper":1,
                     "shopkeeper_docs._id":1,
                      "shopkeeper_docs.location":1,

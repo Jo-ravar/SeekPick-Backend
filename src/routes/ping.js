@@ -27,7 +27,8 @@ router.route('/')
                  body: JSON.stringify(
                       {   data : {
                           title : 'SeekPick',
-                          body : mssg
+                          body : mssg,
+                          name : objName
                     },
                   "to" : device
                     }

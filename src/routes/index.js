@@ -65,12 +65,22 @@ router.route('/login')
         if (user.password !== req.body.password) { 
           res.send({ success: false, message: 'Authentication failed. Passwords did not match.' });
       }else{
-      var payload = {id: user._id};
-       var token = jwt.sign(payload, config.secret,{
+      User.update({username: req.body.username}, { $set: {  registerId: req.body.device} },function(err,data){
+         if(err)
+         {
+            res.json({ success: false,message:'Someting went wrong'});         
+         }else{
+            var payload = {id: user._id};
+            var token = jwt.sign(payload, config.secret,{
             expiresIn: 2592000 // in seconds
           });
           res.json({ success: true, token: 'JWT ' + token });
-      } }} });
+         }
+
+      });  
+     }
+    
+   }} });
 
 });
 

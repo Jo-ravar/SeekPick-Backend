@@ -28,7 +28,6 @@ var UserSchema = new Schema({
   registerId:{
       type: String,
       required:true,
-      unique:true
   },
    loc: {
     type: {

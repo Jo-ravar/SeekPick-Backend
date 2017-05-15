@@ -149,14 +149,18 @@ if(!req.body.itemname ||!req.body.ans)
         var user = req.user._id; 
         var db=dbhelper.db;
         var collection = db.collection('items');
-        collection.update({shopkeeper:user,name:req.body.itemname},{$set:{status:req.body.ans, lastUpdate:dateStr}},function(err,data){
+        collection.update({shopkeeper:user,name:req.body.itemname},{$set:{status:req.body.ans, lastUpdate:dateStr}},function(err,results){
              if(err)
             {
                 console.log("Error in editing " + JSON.stringify(err));
                  return res.json({ success: false, message: 'Something went wrong.'});
             }
        else{
-            res.send({ success: true, message: ' successfully updated status.' });
+           if(results.result.nModified==0)
+           { res.send({ success: true, message: 'SORRY,you are logged in with different shop enquiry of only logged in shop can be updated. ' });}
+            else{
+                res.send({ success: true, message: ' successfully updated status.' });
+              }
          }
         });
    }

@@ -18,16 +18,16 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
+  registerId:{
+    type:String,
+    unique:false
+  },
   name:String,
   phone:Number,
   pincode:Number,
   location:{
       type:String,
       required:true
-  },
-  registerId:{
-      type: String,
-      required:true,
   },
    loc: {
     type: {

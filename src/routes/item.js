@@ -156,11 +156,7 @@ if(!req.body.itemname ||!req.body.ans)
                  return res.json({ success: false, message: 'Something went wrong.'});
             }
        else{
-           if(results.result.nModified==0)
-           { res.send({ success: true, message: 'SORRY,you are logged in with different shop enquiry of only logged in shop can be updated. ' });}
-            else{
-                res.send({ success: true, message: ' successfully updated status.' });
-              }
+             res.send({ success: true, message: ' successfully updated status.' });
          }
         });
    }
